@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { userStore } from '@/utils/accessor/store'
 
 export default defineComponent({
   name: 'CodeRequest',
@@ -30,13 +31,22 @@ export default defineComponent({
     const valid = ref(false)
     const loading = ref(false)
     const email = ref('')
-    const request = () => {
+    const request = async () => {
       console.log('request code')
       loading.value = true
-      setTimeout(() => {
+      try {
+        const response = await userStore.fetchRequestAuthCode(email.value)
+        setTimeout(() => {
+          loading.value = false
+          router.push({
+            path: '/password/verify',
+            query: { email: email.value },
+          })
+        }, 1000)
+      } catch (e) {
         loading.value = false
-        router.push({ path: '/password/verify' })
-      }, 1000)
+        console.error(e)
+      }
     }
     return {
       valid,

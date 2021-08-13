@@ -9,20 +9,17 @@
       "DOM"
     ],
     "esModuleInterop": true,
-    "allowJs": true,
+    "allowJs": false,
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "~/*": [ "./*" ],
+      "@/*": [ "./*" ]
     },
+    "typeRoots": ["types"],
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
