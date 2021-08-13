@@ -2,15 +2,15 @@
   <v-card>
     <v-card-title class="headline">인증 코드 발급 요청 페이지</v-card-title>
     <v-card-text>
-      <v-form v-model="valid" lazy-validation>
+      <v-form ref="$form" v-model="valid" lazy-validation>
         <v-text-field
           v-model="email"
+          label="E-mail"
+          required
           :rules="[
             (v) => !!v || 'E-mail is required',
             (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
           ]"
-          label="E-mail"
-          required
         />
         <v-btn :loading="loading" :disabled="loading" @click="request"
           >인증코드 발송</v-btn
@@ -23,32 +23,39 @@
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { userStore } from '@/utils/accessor/store'
+import { VFormComponent } from '@/types/app'
+import { isValidate } from '@/utils/vutity'
 
 export default defineComponent({
   name: 'CodeRequest',
   setup(props, context) {
     const router = useRouter()
+    const $form = ref<VFormComponent | null>(null)
     const valid = ref(false)
     const loading = ref(false)
-    const email = ref('')
+    const email = ref('ably368@dummy.com')
+
     const request = async () => {
-      console.log('request code')
+      if (!isValidate($form.value)) return
       loading.value = true
       try {
-        const response = await userStore.fetchRequestAuthCode(email.value)
-        setTimeout(() => {
-          loading.value = false
-          router.push({
-            path: '/password/verify',
-            query: { email: email.value },
-          })
-        }, 1000)
+        const { issueToken, remainMillisecond } =
+          await userStore.fetchRequestAuthCode(email.value)
+        userStore.setResetPassword({
+          email: email.value,
+          remainMillisecond,
+          issueToken,
+        })
+        loading.value = false
+        router.push({ path: '/password/verify' })
       } catch (e) {
         loading.value = false
         console.error(e)
       }
     }
+
     return {
+      $form,
       valid,
       loading,
       email,

@@ -5,16 +5,16 @@ import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 let $axios: NuxtAxiosInstance
 
 export function initializeAxios(axios: NuxtAxiosInstance, context: Context) {
-  axios.defaults.timeout = 1000 * 60 * 3
+  axios.defaults.timeout = 5000
 
   axios.interceptors.request.use(
     (config: AxiosRequestConfig) => config,
-    (error: AxiosError) => onRejected(error)
+    (error: AxiosError) => onRejected(error),
   )
 
   axios.interceptors.response.use(
     (response: AxiosResponse) => response,
-    (error: AxiosError) => onRejected(error)
+    (error: AxiosError) => onRejected(error),
   )
 
   $axios = axios

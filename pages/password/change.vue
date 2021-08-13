@@ -2,12 +2,23 @@
   <v-card>
     <v-card-title class="headline">비밀번호 변경 페이지</v-card-title>
     <v-card-text>
-      <v-form v-model="valid" lazy-validation>
-        <v-text-field v-model="newPassword" label="New Password" required />
+      <v-form ref="$form" v-model="valid" lazy-validation>
+        <v-text-field
+          v-model="newPassword"
+          type="password"
+          label="New Password"
+          required
+          :rules="[(v) => !!v || '비밀번호를 입력해주세요.']"
+        />
         <v-text-field
           v-model="confirmPassword"
+          type="password"
           label="Confirm Password"
           required
+          :rules="[
+            (v) => !!v || '비밀번호를 입력해주세요.',
+            (v) => v === newPassword || '비밀번호는 같아야 합니다.',
+          ]"
         />
         <v-btn :loading="loading" :disabled="loading" @click="changePassword"
           >비밀번호 변경하기</v-btn
@@ -19,24 +30,45 @@
 
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { VFormComponent } from '@/types/app'
+import { isValidate } from '@/utils/vutity'
+import { userStore } from '@/utils/accessor/store'
 
 export default defineComponent({
   name: 'CodeRequest',
+  beforeRouteEnter(to, from, next) {
+    userStore.resetPassword?.confirmToken ? next() : next('/')
+  },
   setup(props, context) {
     const router = useRouter()
+    const $form = ref<VFormComponent | null>(null)
     const valid = ref(false)
     const loading = ref(false)
     const newPassword = ref('')
     const confirmPassword = ref('')
-    const changePassword = () => {
-      console.log('change password')
+
+    const changePassword = async () => {
+      if (!isValidate($form.value)) return
+      if (!userStore.resetPassword?.confirmToken) return
       loading.value = true
-      setTimeout(() => {
+      const { email, confirmToken } = userStore.resetPassword
+      try {
+        await userStore.fetchChangePassword({
+          email,
+          confirmToken,
+          newPassword: newPassword.value,
+          newPasswordConfirm: confirmPassword.value,
+        })
         loading.value = false
+        userStore.setResetPassword(null)
         router.push({ path: '/' })
-      }, 1000)
+      } catch (e) {
+        console.error(e)
+      }
     }
+
     return {
+      $form,
       valid,
       loading,
       newPassword,
