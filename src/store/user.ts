@@ -4,8 +4,8 @@ import {
   VuexAction,
   VuexMutation,
 } from 'nuxt-property-decorator'
-import { $axios } from '@/utils/accessor/module'
-import { IUser } from '@/types/store'
+import { $axios } from '~/utils/accessor/module'
+import { IUser } from '~/types/store'
 
 @Module({
   name: 'user',

@@ -36,10 +36,10 @@ import {
   ref,
   useRouter,
 } from '@nuxtjs/composition-api'
-import { userStore } from '@/store'
-import { VFormComponent } from '@/types/app'
-import { isValidate } from '@/utils/vuetity'
-import TimeCounter from '@/components/TimeCounter.vue'
+import { userStore } from '~/store'
+import { VFormComponent } from '~/types/app'
+import { isValidate } from '~/utils/vuetity'
+import TimeCounter from '~/components/TimeCounter.vue'
 
 export default defineComponent({
   name: 'Step2',

@@ -22,9 +22,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
-import { userStore } from '@/utils/accessor/store'
-import { VFormComponent } from '@/types/app'
-import { isValidate } from '@/utils/vuetity'
+import { userStore } from '~/utils/accessor/store'
+import { VFormComponent } from '~/types/app'
+import { isValidate } from '~/utils/vuetity'
 
 export default defineComponent({
   name: 'Step1',
