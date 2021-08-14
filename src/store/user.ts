@@ -6,6 +6,7 @@ import {
 } from 'nuxt-property-decorator'
 import { $axios } from '~/utils/accessor/module'
 import { IUser } from '~/types/store'
+import { storageKey } from '~/utils/constant'
 
 @Module({
   name: 'user',
@@ -14,6 +15,7 @@ import { IUser } from '~/types/store'
 })
 export default class User extends VuexModule {
   resetPassword: IUser['resetPassword'] = null
+  isLoggedIn: IUser['isLoggedIn'] = false
 
   // ------------ actions -------------
   @VuexAction({ rawError: true })
@@ -48,10 +50,33 @@ export default class User extends VuexModule {
     return $axios.$patch('/api/reset-password', data)
   }
 
+  @VuexAction({ rawError: true })
+  async fetchLogin(
+    data: RequestType.Login.Post,
+  ): Promise<ResponseType.Login.Post> {
+    try {
+      const response = await $axios.$post<ResponseType.Login.Post>(
+        '/api/login',
+        data,
+      )
+      window.localStorage.setItem(storageKey.accessToken, response.accessToken)
+      this.setIsLoggedIn(true)
+      return response
+    } catch (e) {
+      window.localStorage.removeItem(storageKey.accessToken)
+      throw e
+    }
+  }
+
   // ------------ mutation -------------
   @VuexMutation
   setResetPassword(data: IUser['resetPassword']) {
     this.resetPassword = data
+  }
+
+  @VuexMutation
+  setIsLoggedIn(isLoggedIn: IUser['isLoggedIn']) {
+    this.isLoggedIn = isLoggedIn
   }
 }
 

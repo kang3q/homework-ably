@@ -5,4 +5,5 @@ export interface IUser {
     confirmToken?: string
     remainMillisecond: number
   }
+  isLoggedIn: boolean
 }

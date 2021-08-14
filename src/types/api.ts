@@ -4,6 +4,7 @@ namespace ResponseType {
       message: string
     }
   }
+
   export namespace ResetPassword {
     export interface Get {
       issueToken: string // 인증 코드 발급 요청 토큰
@@ -11,6 +12,12 @@ namespace ResponseType {
     }
     export interface Post {
       confirmToken: string // 인증 코드 검증 토큰
+    }
+  }
+
+  export namespace Login {
+    export interface Post {
+      accessToken: string // JWT 인증 토큰
     }
   }
 }
@@ -27,6 +34,13 @@ namespace RequestType {
       confirmToken: string // 인증 코드 검증 토큰
       newPassword: string // 새로운 비밀번호
       newPasswordConfirm: string // 새로운 비밀번호 확인
+    }
+  }
+
+  export namespace Login {
+    export interface Post {
+      email: string // 이메일
+      password: string // 비밀번호
     }
   }
 }
