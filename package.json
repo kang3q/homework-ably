@@ -1,12 +1,12 @@
 {
   "name": "homework-ably",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate && git add docs",
+    "generate": "rm -rf docs && nuxt generate && git add docs",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "prepare": "husky install",
     "lint": "npm run lint:js",
