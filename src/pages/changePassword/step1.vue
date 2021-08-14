@@ -33,7 +33,7 @@ export default defineComponent({
     const $form = ref<VFormComponent | null>(null)
     const valid = ref(false)
     const loading = ref(false)
-    const email = ref('ably368@dummy.com')
+    const email = ref('')
 
     const request = async () => {
       if (!isValidate($form.value)) return

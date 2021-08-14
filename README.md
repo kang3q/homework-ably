@@ -1,6 +1,12 @@
 # homework-ably
 
-웹사이트: [https://kang3q.github.io/homework-ably/](https://kang3q.github.io/homework-ably/)
+## 데모 페이지
+링크: [https://kang3q.github.io/homework-ably/](https://kang3q.github.io/homework-ably/)
+```text
+ID: ably368@dummy.com
+PW: !abc321#$
+인증코드: 171009
+```
 
 ## Build Setup
 

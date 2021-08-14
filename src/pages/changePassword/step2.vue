@@ -58,7 +58,7 @@ export default defineComponent({
     const valid = ref(false)
     const loading = ref(false)
     const reLoading = ref(false)
-    const code = ref('171009')
+    const code = ref('')
     const expireTime = computed(() => {
       if (reLoading.value) return 0
       return userStore.resetPassword?.remainMillisecond ?? 0

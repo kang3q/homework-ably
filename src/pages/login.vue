@@ -41,8 +41,8 @@ export default defineComponent({
     const $form = ref<VFormComponent | null>(null)
     const valid = ref(false)
     const loading = ref(false)
-    const email = ref('ably368@dummy.com')
-    const password = ref('1234')
+    const email = ref('')
+    const password = ref('')
 
     const onLogin = async () => {
       if (!isValidate($form.value)) return
