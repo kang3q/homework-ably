@@ -31,7 +31,7 @@
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { VFormComponent } from '@/types/app'
-import { isValidate } from '@/utils/vutity'
+import { isValidate } from '@/utils/vuetity'
 import { userStore } from '@/utils/accessor/store'
 
 export default defineComponent({
@@ -61,7 +61,7 @@ export default defineComponent({
         })
         loading.value = false
         userStore.setResetPassword(null)
-        router.push({ path: '/' })
+        router.replace({ path: '/' })
       } catch (e) {
         console.error(e)
       }

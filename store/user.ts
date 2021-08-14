@@ -26,6 +26,14 @@ export default class User extends VuexModule {
   }
 
   @VuexAction({ rawError: true })
+  fetchReRequestAuthCode(): Promise<ResponseType.ResetPassword.Get> {
+    if (!this.resetPassword?.email) {
+      return Promise.reject(new Error('이메일 없습니다.'))
+    }
+    return this.fetchRequestAuthCode(this.resetPassword.email)
+  }
+
+  @VuexAction({ rawError: true })
   fetchVerityAuthCode(
     data: RequestType.ResetPassword.Post,
   ): Promise<ResponseType.ResetPassword.Post> {
