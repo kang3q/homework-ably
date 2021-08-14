@@ -15,7 +15,7 @@ import { storageKey } from '~/utils/constant'
 })
 export default class User extends VuexModule {
   resetPassword: IUser['resetPassword'] = null
-  isLoggedIn: IUser['isLoggedIn'] = false
+  accessToken: IUser['accessToken'] = null
 
   // ------------ actions -------------
   @VuexAction({ rawError: true })
@@ -59,13 +59,21 @@ export default class User extends VuexModule {
         '/api/login',
         data,
       )
-      window.localStorage.setItem(storageKey.accessToken, response.accessToken)
-      this.setIsLoggedIn(true)
+      this.setAccessToken(response.accessToken)
       return response
     } catch (e) {
-      window.localStorage.removeItem(storageKey.accessToken)
+      this.removeAccessToken()
       throw e
     }
+  }
+
+  @VuexAction({ rawError: true })
+  fetchUser(): Promise<ResponseType.User.Get> {
+    return $axios.$get<ResponseType.User.Get>('/api/user', {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    })
   }
 
   // ------------ mutation -------------
@@ -75,8 +83,15 @@ export default class User extends VuexModule {
   }
 
   @VuexMutation
-  setIsLoggedIn(isLoggedIn: IUser['isLoggedIn']) {
-    this.isLoggedIn = isLoggedIn
+  setAccessToken(token: string) {
+    window.localStorage.setItem(storageKey.accessToken, token)
+    this.accessToken = token
+  }
+
+  @VuexMutation
+  removeAccessToken() {
+    window.localStorage.removeItem(storageKey.accessToken)
+    this.accessToken = null
   }
 }
 

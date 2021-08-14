@@ -23,7 +23,7 @@
           >로그인</v-btn
         >
         <nuxt-link to="/changePassword" style="text-decoration: none">
-          <v-btn>비밀번호 변경</v-btn>
+          <v-btn>비밀번호 재설정</v-btn>
         </nuxt-link>
       </v-form>
     </v-card-text>
@@ -44,7 +44,7 @@ export default defineComponent({
     const valid = ref(false)
     const loading = ref(false)
     const email = ref('ably368@dummy.com')
-    const password = ref('')
+    const password = ref('!abc321#$')
 
     const onLogin = async () => {
       if (!isValidate($form.value)) return
@@ -55,7 +55,7 @@ export default defineComponent({
           password: password.value,
         })
         loading.value = false
-        router.push({ path: '/' })
+        router.push({ path: '/me' })
       } catch (e) {
         loading.value = false
         console.error(e)
