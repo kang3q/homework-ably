@@ -86,5 +86,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     publicPath: 'https://kang3q.github.io/homework-ably',
+    filenames: {
+      app: ({ isDev }) => (isDev ? '[name].js' : '[name].[chunkhash:8].js'),
+      chunk: ({ isDev }) => (isDev ? '[name].js' : '[name].[chunkhash:8].js'),
+      css: ({ isDev }) => (isDev ? '[name].js' : '[name].[contenthash:8].css'),
+    },
   },
 }
