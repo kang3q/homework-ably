@@ -13,6 +13,8 @@ export default {
     dir: 'docs',
   },
 
+  parallel: true,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - homework-ably',
@@ -78,5 +80,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    publicPath: 'https://kang3q.github.io/homework-ably',
+  },
 }
