@@ -42,8 +42,14 @@ import { isValidate } from '@/utils/vuetity'
 import TimeCounter from '@/components/TimeCounter.vue'
 
 export default defineComponent({
-  name: 'Verify',
+  name: 'Step2',
   components: { TimeCounter },
+  beforeRouteLeave(to, from, next) {
+    if (to.path === '/changePassword/step1') {
+      userStore.setResetPassword(null)
+    }
+    next()
+  },
   beforeRouteEnter(to, from, next) {
     userStore.resetPassword ? next() : next('/')
   },
@@ -94,7 +100,7 @@ export default defineComponent({
         })
         userStore.setResetPassword({ ...userStore.resetPassword, confirmToken })
         loading.value = false
-        router.replace({ path: '/password/change' })
+        router.replace({ path: '/changePassword/step3' })
       } catch (e) {
         console.error(e)
       }

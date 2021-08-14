@@ -66,7 +66,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/password/codeRequest">
+          <v-btn color="primary" nuxt to="/changePassword">
             비밀번호 변경
           </v-btn>
         </v-card-actions>

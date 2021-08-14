@@ -35,7 +35,11 @@ import { isValidate } from '@/utils/vuetity'
 import { userStore } from '@/utils/accessor/store'
 
 export default defineComponent({
-  name: 'CodeRequest',
+  name: 'Step3',
+  beforeRouteLeave(to, from, next) {
+    userStore.setResetPassword(null)
+    next()
+  },
   beforeRouteEnter(to, from, next) {
     userStore.resetPassword?.confirmToken ? next() : next('/')
   },

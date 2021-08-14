@@ -27,7 +27,7 @@ import { VFormComponent } from '@/types/app'
 import { isValidate } from '@/utils/vuetity'
 
 export default defineComponent({
-  name: 'CodeRequest',
+  name: 'Step1',
   setup(props, context) {
     const router = useRouter()
     const $form = ref<VFormComponent | null>(null)
@@ -47,7 +47,7 @@ export default defineComponent({
           issueToken,
         })
         loading.value = false
-        router.push({ path: '/password/verify' })
+        router.push({ path: '/changePassword/step2' })
       } catch (e) {
         loading.value = false
         console.error(e)
