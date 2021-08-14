@@ -15,6 +15,10 @@ export default {
 
   parallel: true,
 
+  router: {
+    base: '/homework-ably/',
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - homework-ably',
