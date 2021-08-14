@@ -56,7 +56,7 @@
           </div>
           <hr class="my-3" />
           <a
-            href="https://github.com/kang3q/ably-homework"
+            href="https://github.com/kang3q/homework-ably"
             target="_blank"
             rel="noopener noreferrer"
           >

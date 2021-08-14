@@ -9,8 +9,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - ably-homework',
-    title: 'ably-homework',
+    titleTemplate: '%s - homework-ably',
+    title: 'homework-ably',
     htmlAttrs: {
       lang: 'ko',
     },
