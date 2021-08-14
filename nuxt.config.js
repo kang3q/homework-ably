@@ -9,6 +9,10 @@ export default {
 
   srcDir: 'src',
 
+  generate: {
+    dir: 'docs',
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - homework-ably',

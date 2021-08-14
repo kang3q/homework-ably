@@ -6,11 +6,12 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate && git add docs",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "prepare": "husky install",
     "lint": "npm run lint:js",
-    "test": "jest"
+    "test": "jest",
+    "http": "npx http-server ./docs -p 3030 -g -o --proxy http://127.0.0.1:3030?"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint"
