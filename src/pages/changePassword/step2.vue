@@ -1,4 +1,3 @@
-<style scoped></style>
 <template>
   <v-card>
     <v-card-title class="headline">인증 코드 검증 페이지</v-card-title>

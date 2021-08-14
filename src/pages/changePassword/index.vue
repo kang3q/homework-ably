@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'index',
+  name: 'ChangePassword',
   beforeRouteEnter(to, from, next) {
     next('/changePassword/step1')
   },
