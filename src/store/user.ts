@@ -68,6 +68,21 @@ export default class User extends VuexModule {
   }
 
   @VuexAction({ rawError: true })
+  async fetchLogout(): Promise<ResponseType.Logout.Post> {
+    const response = await $axios.$post<ResponseType.Logout.Post>(
+      '/api/logout',
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+      },
+    )
+    this.removeAccessToken()
+    return response
+  }
+
+  @VuexAction({ rawError: true })
   fetchUser(): Promise<ResponseType.User.Get> {
     return $axios.$get<ResponseType.User.Get>('/api/user', {
       headers: {
@@ -92,13 +107,5 @@ export default class User extends VuexModule {
   removeAccessToken() {
     window.localStorage.removeItem(storageKey.accessToken)
     this.accessToken = null
-  }
-}
-
-export function initResetPassword(): IUser['resetPassword'] {
-  return {
-    email: '',
-    issueToken: '',
-    remainMillisecond: 0,
   }
 }

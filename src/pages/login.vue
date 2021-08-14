@@ -22,9 +22,7 @@
         <v-btn :loading="loading" :disabled="loading" @click="onLogin"
           >로그인</v-btn
         >
-        <nuxt-link to="/changePassword" style="text-decoration: none">
-          <v-btn>비밀번호 재설정</v-btn>
-        </nuxt-link>
+        <v-btn nuxt to="/changePassword">비밀번호 재설정</v-btn>
       </v-form>
     </v-card-text>
   </v-card>
@@ -44,7 +42,7 @@ export default defineComponent({
     const valid = ref(false)
     const loading = ref(false)
     const email = ref('ably368@dummy.com')
-    const password = ref('!abc321#$')
+    const password = ref('1234')
 
     const onLogin = async () => {
       if (!isValidate($form.value)) return

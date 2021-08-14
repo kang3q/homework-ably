@@ -1,10 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <nuxt-link to="/" style="text-decoration: none">
-        <v-btn>홈으로</v-btn>
-      </nuxt-link>
-      <v-btn class="ml-2">로그아웃</v-btn>
+      <v-btn nuxt to="/">홈으로</v-btn>
+      <v-btn class="ml-2" @click="doLogout">로그아웃</v-btn>
     </v-row>
     <v-row justify="space-around" class="pt-3">
       <v-card width="400">
@@ -25,15 +23,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from '@nuxtjs/composition-api'
+import { defineComponent, toRefs, useRouter } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 import { userStore } from '~/store'
+import useUser from '~/composables/useUser'
 
 export default defineComponent({
   name: 'Me',
   setup(props) {
+    const { doLogout } = useUser()
     return {
       ...toRefs<ResponseType.User.Get>(props as ResponseType.User.Get),
+      doLogout,
     }
   },
   asyncData(ctx: Context): Promise<object | void> | object | void {

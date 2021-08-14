@@ -21,6 +21,12 @@ namespace ResponseType {
     }
   }
 
+  export namespace Logout {
+    export interface Post {
+      lastConnectedAt: Date // 마지막 접속 일자
+    }
+  }
+
   export namespace User {
     export interface Get {
       name: string // 이름
