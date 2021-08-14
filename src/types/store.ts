@@ -7,3 +7,7 @@ export interface IUser {
   }
   accessToken: string | null
 }
+
+export interface State {
+  user: IUser
+}

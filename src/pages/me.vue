@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent, toRefs } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
-import { userStore } from '@/store'
+import { userStore } from '~/store'
 
 export default defineComponent({
   name: 'Me',
