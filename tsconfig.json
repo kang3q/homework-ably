@@ -25,7 +25,8 @@
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
-      "@types/node"
+      "@types/node",
+      "@types/jest"
     ]
   },
   "exclude": [
@@ -33,5 +34,6 @@
     ".nuxt",
     "dist",
     "docs",
-  ]
+  ],
+  "files": ["./src/types/vue-shim.d.ts"]
 }
