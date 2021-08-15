@@ -51,7 +51,7 @@ export default defineComponent({
             clearInterval(interval!)
             context.emit('expired', true)
           }
-        }, 50)
+        }, 1000)
       })
     }
 
