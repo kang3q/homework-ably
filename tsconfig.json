@@ -35,5 +35,5 @@
     "dist",
     "docs",
   ],
-  "files": ["./src/types/vue-shim.d.ts"]
+  // "files": ["./src/types/vue-shim.d.ts"]
 }
